@@ -81,9 +81,9 @@ ItemDeleteDialog → DELETE عبر API
 ---
 
 ## 📋 سجل التقدم
-- [ ] الخطوة 1: تعريف الـ Types في `types/item.ts`
-- [ ] الخطوة 2: API Route — GET + POST في `api/items/route.ts`
-- [ ] الخطوة 3: API Route — GET + PUT + DELETE في `api/items/[id]/route.ts`
+- [x] الخطوة 1: تعريف الـ Types في `types/item.ts`
+- [x] الخطوة 2: API Route — GET + POST في `api/items/route.ts`
+- [x] الخطوة 3: API Route — GET + PUT + DELETE في `api/items/[id]/route.ts`
 - [ ] الخطوة 4: بناء `ItemsContext`
 - [ ] الخطوة 5: بناء `ItemsToolbar`
 - [ ] الخطوة 6: بناء `ItemsTable`
@@ -95,8 +95,8 @@ ItemDeleteDialog → DELETE عبر API
 ---
 
 ## 🔖 آخر نقطة توقف
-آخر خطوة مكتملة: [اكتب هنا]
-ملاحظات للجلسة القادمة: [اكتب هنا]
+آخر خطوة مكتملة: [الخطوة 3]
+ملاحظات للجلسة القادمة: [الخطوة 4]
 
 ---
 

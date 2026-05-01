@@ -15,6 +15,13 @@ const items: Item[] = [
     category: "Category B",
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "3",
+    name: "Item Three",
+    status: "active",
+    category: "Category A",
+    createdAt: new Date().toISOString(),
+  }
 ];
 
 type RouteContext = {

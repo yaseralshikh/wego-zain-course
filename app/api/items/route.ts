@@ -15,6 +15,13 @@ const items: Item[] = [
     category: "Category B",
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "3",
+    name: "Item Three",
+    status: "active",
+    category: "Category A",
+    createdAt: new Date().toISOString(),
+  }
 ];
 
 export async function GET() {
@@ -22,17 +29,20 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as CreateItemInput;
+  try {
+    const body = (await request.json()) as CreateItemInput;
 
-  const newItem: Item = {
-    id: crypto.randomUUID(),
-    name: body.name,
-    status: body.status,
-    category: body.category,
-    createdAt: new Date().toISOString(),
-  };
+    const newItem: Item = {
+      id: crypto.randomUUID(),
+      name: body.name,
+      status: body.status,
+      category: body.category,
+      createdAt: new Date().toISOString(),
+    };
 
-  items.push(newItem);
-
-  return Response.json(newItem, { status: 201 });
+    items.push(newItem);    
+    return Response.json(newItem, { status: 201 });
+  } catch (error) {
+    return Response.json({ error: "Failed to create item" }, { status: 500 });
+  }
 }

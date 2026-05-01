@@ -1,4 +1,5 @@
 export type ItemStatus = "active" | "inactive";
+export type ItemStatusFilter = "all" | ItemStatus;
 
 export interface Item {
   id: string;

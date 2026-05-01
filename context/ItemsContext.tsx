@@ -6,17 +6,18 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { Item } from "@/types/item";
+
+import type { Item, ItemStatusFilter } from "@/types/item";
 
 type ItemsContextValue = {
   items: Item[];
   search: string;
-  statusFilter: "all" | "active" | "inactive";
+  statusFilter: ItemStatusFilter;
   selectedItem: Item | null;
   isFormOpen: boolean;
   isDeleteOpen: boolean;
   setSearch: (value: string) => void;
-  setStatusFilter: (value: "all" | "active" | "inactive") => void;
+  setStatusFilter: (value: ItemStatusFilter) => void;
   setItems: (items: Item[]) => void;
   openCreateModal: () => void;
   openEditModal: (item: Item) => void;
@@ -38,9 +39,7 @@ export function ItemsProvider({
 }: ItemsProviderProps) {
   const [items, setItems] = useState<Item[]>(initialItems);
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<
-    "all" | "active" | "inactive"
-  >("all");
+  const [statusFilter, setStatusFilter] = useState<ItemStatusFilter>("all");
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);

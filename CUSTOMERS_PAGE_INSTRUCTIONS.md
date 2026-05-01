@@ -96,7 +96,7 @@ Customer {
 - [x] الخطوة 6: حل مشكلة `RLS` والسماح بالقراءة
 - [x] الخطوة 7: إنشاء `app/(dashboard)/customers/page.tsx`
 - [x] الخطوة 8: عرض البيانات داخل جدول بسيط
-- [ ] الخطوة 9: نقل الجدول إلى `components/customers/CustomersTable.tsx`
+- [x] الخطوة 9: نقل الجدول إلى `components/customers/CustomersTable.tsx`
 - [ ] الخطوة 10: تنظيم المكونات إلى `components/customers`
 - [ ] الخطوة 11: إضافة إنشاء/تعديل/حذف مع Supabase
 - [ ] الخطوة 12: اختبار كامل + معالجة الأخطاء
@@ -104,8 +104,8 @@ Customer {
 ---
 
 ## 🔖 آخر نقطة توقف
-آخر خطوة مكتملة: [الخطوة 8]
-ملاحظات للجلسة القادمة: [ابدأ من الخطوة 9: استخراج الجدول من page.tsx إلى components/customers/CustomersTable.tsx ثم واصل تنظيم مسار customers]
+آخر خطوة مكتملة: [الخطوة 9]
+ملاحظات للجلسة القادمة: [ابدأ من الخطوة 10]
 
 ---
 

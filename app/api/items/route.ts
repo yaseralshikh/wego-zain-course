@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
     items.push(newItem);    
     return Response.json(newItem, { status: 201 });
-  } catch (error) {
+  } catch {
     return Response.json({ error: "Failed to create item" }, { status: 500 });
   }
 }

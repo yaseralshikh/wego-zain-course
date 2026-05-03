@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, type ComponentProps } from "react";
+import { useState, type ComponentProps } from "react";
+import toast from "react-hot-toast";
 import { useItems } from "@/context/ItemsContext";
 import type {
   CreateItemInput,
@@ -18,30 +19,42 @@ function isItemStatus(value: string): value is ItemStatus {
 export default function ItemFormModal() {
   const { isFormOpen, selectedItem, closeFormModal, items, setItems } = useItems();
 
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [status, setStatus] = useState<ItemStatus>("active");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    if (selectedItem) {
-      setName(selectedItem.name);
-      setCategory(selectedItem.category);
-      setStatus(selectedItem.status);
-      setErrorMessage("");
-      return;
-    }
-
-    setName("");
-    setCategory("");
-    setStatus("active");
-    setErrorMessage("");
-  }, [selectedItem]);
-
   if (!isFormOpen) {
     return null;
   }
+
+  return (
+    <ItemFormContent
+      key={selectedItem?.id ?? "new-item"}
+      selectedItem={selectedItem}
+      items={items}
+      setItems={setItems}
+      closeFormModal={closeFormModal}
+    />
+  );
+}
+
+type ItemFormContentProps = {
+  selectedItem: Item | null;
+  items: Item[];
+  setItems: (items: Item[]) => void;
+  closeFormModal: () => void;
+};
+
+function ItemFormContent({
+  selectedItem,
+  items,
+  setItems,
+  closeFormModal,
+}: ItemFormContentProps) {
+  const [name, setName] = useState(selectedItem?.name ?? "");
+  const [category, setCategory] = useState(selectedItem?.category ?? "");
+  const [status, setStatus] = useState<ItemStatus>(
+    selectedItem?.status ?? "active",
+  );
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (e) => {
     e.preventDefault();
@@ -60,6 +73,7 @@ export default function ItemFormModal() {
 
     if (!trimmedName || !trimmedCategory) {
       setErrorMessage("الاسم والتصنيف مطلوبان");
+      toast.error("الاسم والتصنيف مطلوبان");
       return;
     }
 
@@ -91,6 +105,7 @@ export default function ItemFormModal() {
         setItems(
           items.map((item) => (item.id === updatedItem.id ? updatedItem : item)),
         );
+        toast.success("تم تعديل العنصر بنجاح");
       } else {
         const payload: CreateItemInput = {
           name: trimmedName,
@@ -113,13 +128,16 @@ export default function ItemFormModal() {
         const createdItem = (await response.json()) as Item;
 
         setItems([...items, createdItem]);
+        toast.success("تمت إضافة العنصر بنجاح");
       }
 
       closeFormModal();
     } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "حدث خطأ غير متوقع",
-      );
+      const message =
+        error instanceof Error ? error.message : "حدث خطأ غير متوقع";
+
+      setErrorMessage(message);
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

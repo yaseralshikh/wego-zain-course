@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { useCustomers } from "@/context/CustomersContext";
 
@@ -44,11 +45,14 @@ export default function CustomersDeleteDialog() {
       setCustomers(
         customers.filter((customer) => customer.id !== customerToDelete.id),
       );
+      toast.success("تم حذف العميل بنجاح");
       closeDeleteDialog();
     } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "حدث خطأ غير متوقع",
-      );
+      const message =
+        error instanceof Error ? error.message : "حدث خطأ غير متوقع";
+
+      setErrorMessage(message);
+      toast.error(message);
     } finally {
       setIsDeleting(false);
     }

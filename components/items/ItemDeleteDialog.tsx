@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useItems } from "@/context/ItemsContext";
 
 export default function ItemDeleteDialog() {
@@ -32,11 +33,14 @@ export default function ItemDeleteDialog() {
       }
 
       setItems(items.filter((item) => item.id !== itemToDelete.id));
+      toast.success("تم حذف العنصر بنجاح");
       closeDeleteDialog();
     } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "حدث خطأ غير متوقع",
-      );
+      const message =
+        error instanceof Error ? error.message : "حدث خطأ غير متوقع";
+
+      setErrorMessage(message);
+      toast.error(message);
     } finally {
       setIsDeleting(false);
     }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ToastProvider from "@/components/ui/ToastProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl">
       <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">
         {children}
+        <ToastProvider />
       </body>
     </html>
   );

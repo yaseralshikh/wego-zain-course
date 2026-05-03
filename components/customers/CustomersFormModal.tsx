@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ComponentProps } from "react";
+import toast from "react-hot-toast";
 
 import { useCustomers } from "@/context/CustomersContext";
 import type {
@@ -64,6 +65,7 @@ function CustomersFormContent({
 
     if (!trimmedName && !trimmedEmail && !trimmedImageUrl) {
       setErrorMessage("أدخل قيمة واحدة على الأقل");
+      toast.error("أدخل قيمة واحدة على الأقل");
       return;
     }
 
@@ -100,6 +102,7 @@ function CustomersFormContent({
             customer.id === updatedCustomer.id ? updatedCustomer : customer,
           ),
         );
+        toast.success("تم تعديل العميل بنجاح");
       } else {
         const payload: CreateCustomerInput = {
           name: trimmedName || null,
@@ -125,13 +128,16 @@ function CustomersFormContent({
         const createdCustomer = (await response.json()) as Customer;
 
         setCustomers([...customers, createdCustomer]);
+        toast.success("تمت إضافة العميل بنجاح");
       }
 
       closeFormModal();
     } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "حدث خطأ غير متوقع",
-      );
+      const message =
+        error instanceof Error ? error.message : "حدث خطأ غير متوقع";
+
+      setErrorMessage(message);
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

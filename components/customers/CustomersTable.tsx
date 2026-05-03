@@ -50,7 +50,9 @@ export default function CustomersTable() {
               >
                 <td className="px-4 py-3">{customer.name ?? "-"}</td>
                 <td className="px-4 py-3">{customer.email ?? "-"}</td>
-                <td className="px-4 py-3">{customer.image_url ?? "-"}</td>
+                <td dir="ltr" className="px-4 py-3 text-left">
+                  {customer.image_url ?? "-"}
+                </td>
                 <td className="px-4 py-3">
                   <div className="flex justify-center gap-2">
                     <button

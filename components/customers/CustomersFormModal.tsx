@@ -173,7 +173,7 @@ function CustomersFormContent({
           />
 
           <input
-            type="url"
+            type="text"
             placeholder="رابط الصورة"
             value={imageUrl}
             onChange={(event) => setImageUrl(event.target.value)}
